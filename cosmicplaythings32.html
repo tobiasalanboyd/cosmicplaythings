@@ -1,0 +1,4231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>D&amp;D - Cosmic Playthings</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <style>
+        /* General */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/6c6374bad0b0b6d204d8d6dc4a18d820.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/e8acd7d9bf6207f99350ca9f9e23b168.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/3bdef1251a424500c1b3a78dea9b7e57.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/be0060dafb7a0e31d2a1ca17c0708636.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/8e12fb4f14d9c4592eb8ec9f22337b04.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    white-space: pre-wrap;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.spoiler {
+    border-radius: 3px;
+}
+
+.quote {
+    margin: 0.5em 0;
+    padding-left: 0.6em;
+    border-left: 4px solid;
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, monospace;
+}
+
+.pre--multiline {
+    margin-top: 0.25em;
+    padding: 0.5em;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.mention {
+    border-radius: 3px;
+    padding: 0 2px;
+    color: #7289da;
+    background: rgba(114, 137, 218, .1);
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.25em;
+    height: 1.25em;
+    margin: 0 0.06em;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1em;
+    height: 1em;
+}
+
+.emoji--large {
+    width: 2.8em;
+    height: 2.8em;
+}
+
+/* Preamble */
+
+.preamble {
+    display: grid;
+    margin: 0 0.3em 0.6em 0.3em;
+    max-width: 100%;
+    grid-template-columns: auto 1fr;
+}
+
+.preamble__guild-icon-container {
+    grid-column: 1;
+}
+
+.preamble__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.preamble__entries-container {
+    grid-column: 2;
+    margin-left: 0.6em;
+}
+
+.preamble__entry {
+    font-size: 1.4em;
+}
+
+.preamble__entry--small {
+    font-size: 1em;
+}
+
+/* Chatlog */
+
+.chatlog {
+    max-width: 100%;
+}
+
+.chatlog__message-group {
+    display: grid;
+    margin: 0 0.6em;
+    padding: 0.9em 0;
+    border-top: 1px solid;
+    grid-template-columns: auto 1fr;
+}
+
+.chatlog__author-avatar-container {
+    grid-column: 1;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    grid-column: 2;
+    margin-left: 1.2em;
+    min-width: 50%;
+}
+
+.chatlog__author-name {
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 0.3em;
+    font-size: 0.75em;
+}
+
+.chatlog__message {
+    padding: 0.1em 0.3em;
+    margin: 0 -0.3em;
+    background-color: transparent;
+    transition: background-color 1s ease;
+}
+
+.chatlog__content {
+    font-size: 0.95em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 0.15em;
+    font-size: 0.8em;
+}
+
+.chatlog__attachment-thumbnail {
+    margin-top: 0.3em;
+    max-width: 50%;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__embed {
+    display: flex;
+    margin-top: 0.3em;
+    max-width: 520px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 0.25em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.6em;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    display: flex;
+    width: 100%;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    margin-bottom: 0.3em;
+    align-items: center;
+}
+
+.chatlog__embed-author-icon {
+    margin-right: 0.5em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 0.2em;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 0.6em;
+    font-size: 0.875em;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 0.2em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 1.2em;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-image {
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 0.2em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 0.35em 0.1em 0.1em 0.1em;
+    padding: 0.2em 0.35em;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 0.35em;
+    font-size: 0.875em;
+}
+
+.chatlog__bot-tag {
+    position: relative;
+    top: -.2em;
+    margin-left: 0.3em;
+    padding: 0.05em 0.3em;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    background: #7289da;
+    color: #ffffff;
+    font-size: 0.625em;
+    font-weight: 500;
+}
+
+/* Postamble */
+
+.postamble {
+    margin: 1.4em 0.3em 0.6em 0.3em;
+    padding: 1em;
+    border-top: 1px solid;
+}
+    </style>
+    <style>
+        /* General */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+.ooc {
+    background-color: #111111;
+    color: #dcddde;
+}
+
+.sidestories {
+    background-color: #000000;
+    color: #dcddde;
+}
+a {
+    color: #0096cf;
+}
+
+.spoiler {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.quote {
+    border-color: #4f545c;
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #b9bbbe !important;
+}
+
+/* === Preamble === */
+
+.preamble__entry {
+    color: #ffffff;
+}
+
+/* Chatlog */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__message--highlighted {
+    background-color: rgba(114, 137, 218, 0.2) !important;
+}
+
+.chatlog__message--pinned {
+    background-color: rgba(249, 168, 37, 0.05);
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-color-pill--default {
+    background-color: rgba(79, 84, 92, 1);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Postamble */
+
+.postamble {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.postamble__entry {
+    color: #ffffff;
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Guild icon" />
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">D&amp;D</div>
+        <div class="preamble__entry">The Cosmic Playthings</div>
+
+
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 0:33</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">I'm choosing not to take this as a true warning, and instead taking it as a teenage sibling who desperately hates seeing even more relatives at the family reunion.
+Thia: "Fera! I brought snacks!"
+Fera: "NoooooOOOOoooooOOOOOoooooo!"</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 0:34</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“Well, her dad did die down there, so I dunno... but she said the elf god, Corellon whatshisface, told her not to leave.”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 0:34</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">omfg</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 0:35</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“UGHHHH I don’t want to pay for ANOTHER candlenights present this year!!”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 0:35</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“I only get so much allowance!”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 0:35</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">XD</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 0:35</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">God, both Fera and Thia are gonna be so shaken after this.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 0:35</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">YEAH</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 0:36</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">just wait until they find out about their secret third sibling, the sun elf athlete Fifa</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 0:37</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Jesus Christ</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 0:39</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">I thought up that pun earlier and I’ve just been waiting for an opening XD</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 0:40</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">It's great</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 0:43</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Also feel free to call bullshit on Sam being able to totally half-truth her way through this conversation and ask for rolls if you want XD</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 0:43</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">She is choosing her words *amazingly* carefully</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 0:43</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Like she’s not *lying* but she is obfuscating some of the truth, so a deception roll would be fair if you want</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 0:44</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">The power of Not Wanting To Get Her Crush In Trouble is running through her</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 0:48</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">I'm assuming Corey's done for the night, but I'm excited for what tomorrow brings.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 0:48</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">yea!!!</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 7:33</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Yeah you uh, you don’t need to roll a deception roll for that last part</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 7:36</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">With the insight you rolled earlier, you think Fera looks a bit puzzled when you mentioned Thia’s dad died, but that disappears when you mention the word “Corellon” cause her face contorts into anger immediately at his name</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 7:36</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">https://nerdsthatgeek.com/uploads/3/4/3/4/34346897/published/spinel.jpg?1568819179
+
+We’re talking this face</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 7:43</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">She hauls off and *spits* in the floor (not at you Sam, it’s consciously away from you).
+
+“*Good*,” Fera says, full of hatred and bitterness. “The *cattle* of Corellon have no place in the Underdark. She’d do best to stay where she is *anyway,* but if she follows Corellon too, if *I* saw her, she’d *die*”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/235751037435117568/4c9b2b0d02485ab31db5d4ede450e77b.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" E350#0537data-user-id="234988534853795841" style="color: ">E350</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 8:00</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Thomas has been watching events with some bewilderment.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 8:02</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Garfield is near you and is also watching. He also has seemingly pulled a bag of popcorn from nowhere and offers it to you wordlessly</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/235751037435117568/4c9b2b0d02485ab31db5d4ede450e77b.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" E350#0537data-user-id="234988534853795841" style="color: ">E350</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 8:03</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Thomas elects not to take it.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 8:03</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Garfield shrugs, pulls a box from his robes and starts sprinkling chocolate covered raisins in the bag also</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 8:08</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Garfield made pepcorn</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 8:08</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">https://youtu.be/3fG8rNHUspU</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/235751037435117568/4c9b2b0d02485ab31db5d4ede450e77b.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" E350#0537data-user-id="234988534853795841" style="color: ">E350</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 8:08</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">XD</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 11:48</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Me: Man, Fera's great.
+Thia: [repost 'Lolth did you fuck my dad' meme]</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 11:52</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">XD</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 12:28</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Sam is not *super* comfortable with Fera implicitly calling her friend cattle and saying she’d kill her, but there’s one thing they agree on. “Uh, yeah, Corellon’s the worst. He took Gruumsh’s eye and all.”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 14:02</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“Oh lost an eye, I’m sure that was mildly inconvenient, *he cursed my mom and turned her into a demon spider*”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 14:04</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“Which is something I *MAYBE* could fix if I could get through the fucking door to meet the fucking goddess of knowledge except that asshole—“ Gestures to Garfield “Sold me a bomb that didn’t work!”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 14:15</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Ooooooooh</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 14:17</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">I love that, despite being the goddess of lies, I can really believe Araushnee when she says Corellon did that to her.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 14:18</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Sam’s torn. She wants to help, because that’s in her nature and also fuck Corellon, but she doesn’t know if helping would unleash some sort of horrible force that’ll wreak havoc on the world. “He, uh, cursed your mom? That sucks.”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 14:18</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">You know what? The biggest lie is probably the title itself.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 14:18</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Cause if you're trying to smear someone, that is very much the title you give them.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 14:19</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">YEAH</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 14:38</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“Yes, yes it does. And as soon as I fix my mom, I’m gonna find a way to *fix* Corellon.” And she smiles a wicked smile.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 14:39</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">There’s a pause. “By which I mean kill him. I’m not sure ...not sure how clear that was”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 14:44</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">You get the impression Fera despite being angry kind of wants you, Sam, to think she’s cool for some reason but that’s the most you can figure about why she’s telling you all this</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 14:44</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Actually you rolled insight before I’ll just carry that score over for now</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 14:49</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“Ahh, gotcha. So, uh. What’s your mom like? I’m not real informed on the pantheon, to be honest.” Sam’s trying to figure out if she should risk telling Fera about the computer terminal, or if Garfield maybe has a reason beyond thinking it’s funny to not offer that to her.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 14:53</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“She’s....” Fera seems like she’s searching for the right words. “She’s had a hard life but is trying to be better. Mostly because my dad has been a good influence on her...mooost of the time”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 14:55</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Oh damn</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 14:57</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">I'm honestly surprised Relai, as her consort, would have any effect on her personality or decision making.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:21</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Sam feels like she gets that. “And if you do break the curse on her, she won’t like... murder a buncha innocent people or try to take over the world, right?”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:23</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">yea</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:26</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">"I feel that. Anyway, is your mom, like, evil?"</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:26</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Sam thinks she’s being real subtle XD</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:27</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">"My brother's trying to do the same. Family, am I right?"</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:30</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“I’ve got lots of Evil and ex-Evil relatives, it’s cool!”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:43</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“Oh god, no. No no no. No one innocent.”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:43</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“That I know of”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:44</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“I mean she gets these *moods* but that’s mostly cause of all the—“ she wiggles her fingers. “Demon shit so...I figure that’d curb. That. All That”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:45</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“Okay, cool! I can maybe help you out, then.”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:46</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“You have another bomb?!” She seems really excited</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:46</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Fera's class turns out to be 'pyrotechnic'.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:47</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“No, no, not that. Uh. Have you tried any other ways of getting in contact with Ioun? Less explode-y ways, maybe?”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:47</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“What, you mean like by summoning a demon or something?”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:47</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">XD</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:49</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“...No.” Sam feels like Milo would get along with this lady. “There might be something in this store that you can contact her with.”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:50</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“YES ACTUALLY SAM JUST CONTACTED IOUN LIKE FIFTEEN MINUTES AGO WITH THAT COMPUTER OVER THERE” Garfield chimes in
+
+“...wait, huh?” Fera says</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:51</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“YES TURNS OUT YOU DIDNT EVEN NEED THAT BOMB AT ALL. I WAS WAITING FOR THE RIGHT TIME TO SAY SO TO GET THAT...EFFECT”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:51</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Fera stares at Garfield for a second then immediately just tries to stab him with the same sword that didn’t work before</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:52</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Garfield just kinda nimbly dodges. 
+
+“gosh your entire family doesn’t have a sense of humor” he mumbles.
+
+“Huh?” She said
+
+“NOTHING,” he says</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:52</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">/r d20+4</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/235751037435117568/4c9b2b0d02485ab31db5d4ede450e77b.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Sidekick#6198data-user-id="234988534853795841" style="color: ">Sidekick</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:52</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">@CoreyWW:  `d20+4`  = (4)+4 = 8</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:54</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Sam goes back to her paperwork, satisfied with her contributions to this situation. She writes down 69420 as her social security number for now, and moves on to the next section.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:55</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">not to be crass I just think Sam would do that XD</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:55</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">God</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:55</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“There’s just something inherently funny about those numbers! Don’t know what it is...”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 15:57</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">The Traveller isn't even mad. "HEH, NICE."</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 16:04</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Fera notices what you’re filling out. “Oh don’t—don’t do that, all he does if you fill that out is tell you to try yoga for your psychiatric problems and then sells your information—“
+
+Garfield yells “HEY, THATS A TRADE SECRET”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 16:06</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Lol</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 16:10</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“Ohhh. Thanks for the heads up.” Sam goes back and scratches out any actual information she’s put on there.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 16:12</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“AHHH SHIT, OKAY YOU’RE PAYING EXTRA FOR THE COMPUTER, FERA”
+
+“I’ll tell my mom” Fera said
+
+“—IS A FUNNY JOKE THAT I JUST SAID JUST NOW” Garfield amended</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 16:14</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Sam gets up and stretches. “Welp, in that case, I think I’m gonna go on back to bed. Thomas, you good on your own here?”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 16:14</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Oh my god</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 16:15</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Demigods in Garfield's store are like: "We'll tell on you."</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 16:15</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">djsfndsmd</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 19:15</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Everyone like Fera okay?</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 19:15</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">XD</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 19:19</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Yes</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 19:20</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">I can't wait for her very presence to be at least partially upsetting to Thia.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 19:26</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">yess</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/5/2020 19:36</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">hahaha</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:13</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">(Rolls something)</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:17</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">#NAME?</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/235751037435117568/4c9b2b0d02485ab31db5d4ede450e77b.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" E350#0537data-user-id="234988534853795841" style="color: ">E350</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:18</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Thomas shrugs.
+
+“I suppose so.”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:18</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">You can roll right now and we’ll uh...get into the results of that after</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:18</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">If you like</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:19</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">?</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:19</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Actually @E350 , roll Insight also. I promise this’ll make sense in a moment</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:19</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">/roll d20</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/235751037435117568/4c9b2b0d02485ab31db5d4ede450e77b.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Sidekick#6198data-user-id="234988534853795841" style="color: ">Sidekick</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:19</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">@lonelytuatara:  `d20`  = (12) = 12</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:19</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Yep that’s not gonna do it</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:21</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“Oh um...” Fera approaches Sam. “Actually...before you go I just wanted to say it was nice talking to you and...I wanted to give you this.”
+
+And she pulls a simple obsidian ring from her pocket.
+
+“It’s a drow friendship ring. And since you’re my new friend I would like you to have it”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:22</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">[with a 12 Sam at face value this feels legit to you]</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:23</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">So yeah if you like @E350 , you can have Thomas Bullshit check this also XD</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:25</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Sam blinks and scratches the back of her neck. "Uh. I'm not always the best at picking up on social stuff, so just to clarify, are you flirtin' with me? Like, it's fine if you are, I get it, but I'm kind of already interested in someone else right now so I don't wanna lead you on or nothin'."</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:27</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“What noooooo no no no, nothing like that. This is just a platonic friendship ring. The romantic friendship ring has jewel spiders on it”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:28</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">"Ohh, okay, cool!" Sam takes the ring and puts it in her pocket.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:29</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Toby write “drow friendship ring” in air quotes on your inventory</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:29</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">XD will do</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/235751037435117568/4c9b2b0d02485ab31db5d4ede450e77b.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" E350#0537data-user-id="234988534853795841" style="color: ">E350</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:29</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">/r d20+3</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/235751037435117568/4c9b2b0d02485ab31db5d4ede450e77b.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Sidekick#6198data-user-id="234988534853795841" style="color: ">Sidekick</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:29</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">@E350:  `d20+3`  = (7)+3 = 10</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:33</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Thomas thinks almost verbatim “*seems legit, I dunno, who cares*”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:33</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">So small meta commentary here</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:33</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Fera’s deception skill is a +0 which is hilarious on its own for a drow who is also a Trickery Cleric...she just happened to roll a 17</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:34</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">I was purposely gonna make her seem even more suspicious if she rolled shitty XD</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:36</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">oh my god XD</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:39</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">She also with a 17 was able to evade the “are you flirting with me” portion of that which out of character the answer is probably closer to “maybe a bit, but not that seriously”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:40</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">oohoohoo</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:40</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">I had a feeling XD</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 16:54</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">"Welp, see ya around, I guess!" Sam waves at Fera and Thomas as she walks back out of the shop.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:03</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Fera smiles and waves. Thomas as soon as Sam is out of the store, you see Fera kinda wipe her forehead discreetly for a moment.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:04</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Sam you’re heading back up the long weird dream stairs, is there anything else you want to do prior to just heading back to your “room”?</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:05</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Nah, she’s just gonna go back and flop down on the bed.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:15</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">You go back and flop on the bed</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:16</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Thomas, you and Fera are now the only ones in the store with Garfield. Garfield looks at you Thomas and gestures towards the computer.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/235751037435117568/4c9b2b0d02485ab31db5d4ede450e77b.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" E350#0537data-user-id="234988534853795841" style="color: ">E350</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:17</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Thomas walks over to the computer.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:22</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Fera, who just realized you're getting a turn first at the thing that thing says, "HEY WAIT," right as you're stepping into the curtain. 
+
+You experience pretty much the same thing Thia and Sam did, as soon as you enter the curtain closes on its own and you're no longer in that space, you're teleported into the location with the computer attached to the giant brain that has machinery overhead.
+
+The main difference is that the big steel doors in the corner no longer have someone knocking behind them because the one who had been doing that is currently IN the Fantasy Cosco.
+
+The boom microphone that had extended from the ceiling is still there and as soon as you walk in, another mechanical arm with a red eye on it seems to scan you.
+
+"Hello Thomas Hannigan," the voice of Ioun says as text comes up on the computer saying that identical information. "It's a pleasure to meet you."</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:22</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">"Shall we play a game?"</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:25</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">I'm so glad that ring thing happened XD</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:26</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">*oh boy*</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:26</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Trickery Cleric huh?</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:27</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Yes</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:27</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">I mean, that's the best domain for Lolth, I thought</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:27</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Like I think there's a War domain too which I considered but eehhhhh</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:27</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">It is</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:27</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Trickery is good</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:28</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">i love the parallel of thia being a knowledge cleric and fera being a trickery cleric, someone who obscures knowledge</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:28</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">narrative foils! love it</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:33</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">It's also a little funny how little dexterity she has, given dark elf stereotypes of being sneaky as hell, but it makes sense since she seems to be prioritizing Strength and Constitution.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:34</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Yeah Fera's kinda not as good at most of the things drow are typically supposed to be good at XD</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:34</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Except magic. She's good at that</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:34</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">And being hard to hit</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:37</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Oh, and that's with an ability score improvement, cause she's at Level 4.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:37</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">yep</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:38</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">It makes sense, cause Thia was hasn't been adventuring before now, but in the Underdark you probably need to get capable real fucking quick.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:40</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Relai: "Okay snookums, dodging practice... didn't go so great yesterday--"
+
+Fera: "I got hit with myconoid spores. But I set them all on fire this morning."
+
+Relai: "I see."
+
+Fera: "None were left alive."
+
+Relai: "Riiiight you've been talking to your mother. Okay, so we're gonna try a different approach ... this ... is a shield. When things are coming at you ... you use the shield. And put on as much heavy things as possible."
+
+Fera: "... you don't wear heavy things."
+
+Relai: ".... yes but I'm a boy."
+
+Fera: "Oh."
+
+Relai: "Boys aren't as important"
+
+Fera: "Ohhhhh!"</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:41</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Oof</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:42</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Fera when she finally sees Thia and for a moment thinks: "Did I use Invoke Duplicity without thinking?"</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:42</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">XD</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:43</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Sam: "ANY ONE OF THESE SQUIDWARDS COULD BE THE REAL SQUIDWARD"</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:43</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Pfffffffft</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:46</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Fera: "Daddy look, I found a friend--"
+
+Relai: "Aww that's-- oh god, that's some duergar's baby!"
+
+Baby: "Goo goo"
+
+Relai: "Oh oh jeez um ... hey uh, let's give that to daddy. And he's uh ... he's gonna be out for most of the day now I think trying to resolve this..."</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:48</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">--later--
+
+Relai: "Now what do you say for kidnapping that poor child?"
+
+Fera (rolling her eyes): "I'm sorrrrry"</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:48</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">In all of these so far I've imagine Fera being... whatever the elvish equivalent of being like 9 is</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:48</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">omfg</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:50</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">What is the reason that she has Chaos Bolt?</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:50</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">......uhhhhh</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:50</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">good question</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:51</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Just asking cause I know that's pretty exclusively sorcerer spell. But then again I now have Find Familiar permanently, so.</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:52</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">I think that's an error with the files I'm using in Dungeon Master Vault</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:52</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">The sites having issues so I can't check for certain</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:52</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Mmm</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:53</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">It's an error. I updated the files and the sheet now doesn't show that on there</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 17:59</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">sorry I didn't catch that</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 18:00</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">some of these files that let you import sourcebooks aren't 100% perfect</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 18:00</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">speaking of which there is files for the Wildmount stuff now</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 18:00</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">ooo</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/235751037435117568/4c9b2b0d02485ab31db5d4ede450e77b.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" E350#0537data-user-id="234988534853795841" style="color: ">E350</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 18:03</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">“Pistols at dawn.”</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 18:04</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Ioun laughs mechanically.
+
+"HA. HA. HA. It's always dawn somewhere. But that's interesting. No one's tried *that* in a while"</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/235751037435117568/4c9b2b0d02485ab31db5d4ede450e77b.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" E350#0537data-user-id="234988534853795841" style="color: ">E350</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 18:05</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">I’m gonna have to sleep
+But I wanted to write that before I did lol</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 18:05</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">XD</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/197511619746594817/ad661de8a2a69b82d61ee9910731ee8e.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" lonelytuatara#2458data-user-id="234988534853795841" style="color: ">lonelytuatara</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 18:06</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">night! V excited to see how that shakes out XD</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 18:06</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Me too</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="ooc">\ooc<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/234988534853795841/f33128cc8cd674a7de8dd11bf08ccb58.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" Crooked_Mantis#3252data-user-id="234988534853795841" style="color: ">Crooked_Mantis</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 18:06</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396" id="message-635297172639973396">
+                <div class="chatlog__content">
+                    <span class="markdown">Night</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+</div>
+<div class="rp">\rp<div class="chatlog__message-group">    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/149389522831015937/a7e0ae8b3e0952b689206fe2c517edcf.png"alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title=" CoreyWW#1384data-user-id="234988534853795841" style="color: ">CoreyWW</span>
+
+
+        <span class="chatlog__timestamp">4/6/2020 18:08</span>
+
+            <div class="chatlog__message " data-message-id="635297172639973396"
